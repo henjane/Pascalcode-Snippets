@@ -1,0 +1,6 @@
+[CopyName#]
+
+frxGlobalVariables[‘CopyName0’] := ”; // copy viewed in the preview
+// 1st printed/exported copy
+frxGlobalVariables[‘CopyName2’] := ‘Second copy’; // 2nd printed copy
+frxGlobalVariables[‘CopyName3’] := ‘Third copy’; // 3rd printed copy
