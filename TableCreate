@@ -29,3 +29,4 @@ begin
          CreateTable;
       end;
 end;
+//https://www.elevatesoft.com/manual?action=viewtopic&id=dbisam4&product=delphi&version=5&topic=creating_altering_tables
