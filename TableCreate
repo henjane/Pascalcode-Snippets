@@ -1,0 +1,31 @@
+begin
+   with MyTable do
+      begin
+      DatabaseName:='d:\temp';
+      TableName:='customer';
+      with FieldDefs do
+         begin
+         Clear;
+         Add('CustNo',ftFloat,0,True);
+         Add('Company',ftString,30,False);
+         Add('Addr1',ftString,30,False);
+         Add('Addr2',ftString,30,False);
+         Add('City',ftString,15,False);
+         Add('State',ftString,20,False);
+         Add('Zip',ftString,10,False);
+         Add('Country',ftString,20,False);
+         Add('Phone',ftString,15,False);
+         Add('FAX',ftString,15,False);
+         Add('Contact',ftString,20,False);
+         end;
+      with IndexDefs do
+         begin
+         Clear;
+         Add('','CustNo',[ixPrimary]);
+         Add('ByCompany','Company',[ixCaseInsensitive],
+             '',icDuplicateByte);
+         end;
+      if not Exists then
+         CreateTable;
+      end;
+end;
