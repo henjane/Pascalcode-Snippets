@@ -1,0 +1,5 @@
+[10/01, 10:43] Trevor: a bit of Google , LaserJet models P1100, P1560, P1600 and P2030 series are “host based” and don’t work with Microsoft’s Easy Print Remote Desktop driver. 
+The work around is to install the driver on the Remote Desktop server and then change group policy so the Easy Print driver is not used first in a Remote Desktop session.
+
+Go to Computer Config -> Admin Templates -> Windows Components -> Remote Desktop Services -> RD Session Host -> Printer Redirection -> Use Remote Desktop Easy Print printer driver first –> disabled
+[10/01, 11:10] Errol Iq Dextrous: Under group policy you need to set the Use Easy Print driver first to disabled. Install the exact same driver on the server and it will work for most devices. MFP general battle though.
