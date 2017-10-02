@@ -1,0 +1,55 @@
+procedure SimpanGambar(ADataSet: TDataSet;
+  AImage: TPicture);
+var
+  imgJpeg : TJPEGImage;
+begin
+  if Assigned(ADataset) and Assigned(AImage) then
+  begin
+    imgJpeg := TJPEGImage.Create;
+    try
+      if (AImage.Graphic <> nil) and        (AImage.Graphic.ClassNameIs('TJPegImage')) then
+        begin
+          imgJpeg.Assign(AImage.Graphic);
+          with imgJpeg do
+          begin
+            Grayscale := False;
+            CompressionQuality := 25;
+            ProgressiveEncoding := True;
+            Compress;
+          end;
+          ADataset.FieldByName('GAMBAR').Assign(imgJpeg);
+        end;
+    finally
+      FreeAndNil(imgJpeg);
+    end;
+  end;
+end;
+procedure TampilGambar(ADataSet: TDataSet;out AImage: TPicture);
+var
+  imgJpeg : TJPEGImage;
+begin
+  if Assigned(ADataSet) then
+  begin
+    imgJpeg := TJPEGImage.Create;
+    try
+      if not ADataSet.FieldByName('GAMBAR').IsNull then
+      if TBlobField(ADataSet.FieldByName('GAMBAR')).BlobSize > 0 then
+      begin
+        imgJpeg.Assign(ADataSet.FieldByName('GAMBAR'));
+        with imgJpeg do
+        begin
+          PixelFormat := jf24Bit;
+          Scale := jsFullSize;
+          Grayscale := False;
+          Performance := jpBestQuality;
+          Smoothing := True;
+          ProgressiveDisplay := True;
+        end;
+        AImage.Bitmap.Assign(imgJpeg);
+      end;
+    finally
+      FreeAndNil(imgJpeg);
+    end;
+  end;
+end;
+//https://iwancs.wordpress.com/2006/03/17/cara-menyimpan-format-jpg-ke-database/
